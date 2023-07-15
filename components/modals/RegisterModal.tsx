@@ -16,6 +16,9 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 
+// toast message
+import { toast } from "react-hot-toast";
+
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
     const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +44,7 @@ const RegisterModal = () => {
                 registerModal.onClose();
             })
             .catch((error) => {
-                console.log(error);
+                toast.error("Something went wrong!");
             })
             .finally(() => {
                 setIsLoading(false);
