@@ -24,7 +24,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={nunito.className}>
                 {/* to do or not to do: wrap Modal & NavBar around with ClientOnly component */}
-                <Modal title="Khanh" isOpen />
+                <Modal actionLabel="Submit" title="Khanh" isOpen />
 
                 <NavBar />
 
