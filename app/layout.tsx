@@ -4,7 +4,7 @@ import { Nunito } from "next/font/google";
 
 // components
 import NavBar from "@/components/navbar/NavBar";
-import Modal from "@/components/modals/Modal";
+import RegisterModal from "@/components/modals/RegisterModal";
 
 const nunito = Nunito({
     subsets: ["latin"],
@@ -24,7 +24,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={nunito.className}>
                 {/* to do or not to do: wrap Modal & NavBar around with ClientOnly component */}
-                <Modal actionLabel="Submit" title="Khanh" isOpen />
+                <RegisterModal />
 
                 <NavBar />
 
