@@ -13,7 +13,7 @@ import { FcGoogle } from "react-icons/fc";
 
 // components
 import Modal from "./Modal";
-import { title } from "process";
+import Heading from "../Heading";
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
@@ -47,9 +47,16 @@ const RegisterModal = () => {
             });
     };
 
+    const bodyContent = (
+        <div className="flex flex-col gap-4">
+            <Heading title="Welcome to Airbnb" subtitle="Create an account!" />
+        </div>
+    );
+
     return (
         <Modal
             title="Register"
+            body={bodyContent}
             disabled={isLoading}
             isOpen={registerModal.isOpen}
             actionLabel="Continue"
