@@ -14,6 +14,7 @@ import { FcGoogle } from "react-icons/fc";
 // components
 import Modal from "./Modal";
 import Heading from "../Heading";
+import Input from "../inputs/Input";
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
@@ -50,6 +51,15 @@ const RegisterModal = () => {
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <Heading title="Welcome to Airbnb" subtitle="Create an account!" />
+
+            <Input
+                id="email"
+                label="Email"
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required
+            />
         </div>
     );
 
