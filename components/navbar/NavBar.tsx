@@ -22,7 +22,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
 
                         <Search />
 
-                        <UserMenu />
+                        <UserMenu currentUser={currentUser} />
                     </div>
                 </Container>
             </div>
