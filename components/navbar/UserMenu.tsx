@@ -11,11 +11,11 @@ import useLoginModal from "@/hooks/useLoginModal";
 // icons
 import { AiOutlineMenu } from "react-icons/ai";
 
-import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import { SafeUser } from "@/types";
 
 interface UserMenuProps {
-    currentUser?: User | null;
+    currentUser?: SafeUser | null;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
