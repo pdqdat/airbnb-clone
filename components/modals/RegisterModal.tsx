@@ -6,6 +6,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 // hooks
 import useRegisterModal from "@/hooks/useRegisterModal";
+import useLoginModal from "@/hooks/useLoginModal";
 
 // icons
 import { FcGoogle } from "react-icons/fc";
@@ -24,6 +25,7 @@ import { signIn } from "next-auth/react";
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -54,6 +56,11 @@ const RegisterModal = () => {
                 setIsLoading(false);
             });
     };
+
+    const toggle = useCallback(() => {
+        registerModal.onClose();
+        loginModal.onOpen();
+    }, [loginModal, registerModal]);
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
@@ -113,7 +120,7 @@ const RegisterModal = () => {
 
                     <div
                         className="text-neutral-800 font-bold cursor-pointer hover:underline"
-                        onClick={registerModal.onClose}
+                        onClick={toggle}
                     >
                         Login
                     </div>
@@ -124,7 +131,7 @@ const RegisterModal = () => {
 
     return (
         <Modal
-            title="Register"
+            title="Sign up"
             body={bodyContent}
             footer={footerContent}
             disabled={isLoading}
