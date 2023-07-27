@@ -5,8 +5,11 @@ import { useCallback, useState } from "react";
 // components
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
+
+// hooks
 import useRegisterModal from "@/hooks/useRegisterModal";
 import useLoginModal from "@/hooks/useLoginModal";
+import useRentModal from "@/hooks/useRentModal";
 
 // icons
 import { AiOutlineMenu } from "react-icons/ai";
@@ -23,16 +26,27 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+    const rentModal = useRentModal();
 
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => !value);
     }, []);
 
+    const onRent = useCallback(() => {
+        // check if user is logged in, if not open login modal
+        if (!currentUser) {
+            return loginModal.onOpen();
+        }
+
+        // open rent modal
+        rentModal.onOpen();
+    }, [currentUser, loginModal]);
+
     return (
         <div className="relative">
             <div className="flex flex-row items-center gap-3">
                 <div
-                    onClick={() => {}}
+                    onClick={onRent}
                     className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
                 >
                     Airbnb your home
@@ -75,7 +89,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
                                 <MenuItem
                                     label="Airbnb my home"
-                                    onClick={() => {}}
+                                    onClick={rentModal.onOpen}
                                 />
 
                                 <hr />
