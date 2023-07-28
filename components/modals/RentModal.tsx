@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useForm, FieldValues } from "react-hook-form";
+import dynamic from "next/dynamic";
 
 // components
 import Modal from "./Modal";
@@ -50,6 +51,14 @@ const RentModal = () => {
     const category = watch("category");
     const location = watch("location");
 
+    const Map = useMemo(
+        () =>
+            dynamic(() => import("../Map"), {
+                ssr: false,
+            }),
+        [location]
+    );
+
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
             shouldDirty: true,
@@ -84,7 +93,7 @@ const RentModal = () => {
         return "Back";
     }, [step]);
 
-    // STEP 1: category select
+    //* STEP 1: category select
     let bodyContent = (
         <div className="flex flex-col gap-8">
             <Heading
@@ -110,7 +119,7 @@ const RentModal = () => {
         </div>
     );
 
-    // STEP 1: location select
+    //* STEP 2: location select
     if (step === STEPS.LOCATION) {
         bodyContent = (
             <div className="flex flex-col gap-8">
@@ -123,6 +132,8 @@ const RentModal = () => {
                     value={location}
                     onChange={(value) => setCustomValue("location", value)}
                 />
+
+                <Map center={location?.latlng} />
             </div>
         );
     }
