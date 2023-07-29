@@ -9,6 +9,7 @@ import Modal from "./Modal";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
 import CountrySelect from "../inputs/CountrySelect";
+import Counter from "../inputs/Counter";
 
 // hooks
 import useRentModal from "@/hooks/useRentModal";
@@ -40,6 +41,7 @@ const RentModal = () => {
             category: "",
             location: null,
             guestCount: 1,
+            roomCount: 1,
             bathroomCount: 1,
             imageSrc: "",
             price: 1,
@@ -50,6 +52,9 @@ const RentModal = () => {
 
     const category = watch("category");
     const location = watch("location");
+    const guestCount = watch("guestCount");
+    const roomCount = watch("roomCount");
+    const bathroomCount = watch("bathroomCount");
 
     const Map = useMemo(
         () =>
@@ -134,6 +139,44 @@ const RentModal = () => {
                 />
 
                 <Map center={location?.latlng} country={location?.label} />
+            </div>
+        );
+    }
+
+    //* STEP 3: number of guests/rooms/bathrooms counter
+    if (step === STEPS.INFO) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="Share some basics about your place"
+                    subtitle="What amenities can guests expect?"
+                />
+
+                {/* number of guests */}
+                <Counter
+                    title="Guests"
+                    subtitle="How many guests can your place accommodate?"
+                    value={guestCount}
+                    onChange={(value) => setCustomValue("guestCount", value)}
+                />
+                <hr />
+
+                {/* number of rooms */}
+                <Counter
+                    title="Rooms"
+                    subtitle="How many rooms do you have?"
+                    value={roomCount}
+                    onChange={(value) => setCustomValue("roomCount", value)}
+                />
+                <hr />
+
+                {/* number of bathrooms */}
+                <Counter
+                    title="Bathrooms"
+                    subtitle="How many bathrooms can guests use?"
+                    value={bathroomCount}
+                    onChange={(value) => setCustomValue("bathroomCount", value)}
+                />
             </div>
         );
     }
