@@ -18,9 +18,10 @@ L.Icon.Default.mergeOptions({
 
 interface MapProps {
     center?: number[];
+    country?: string;
 }
 
-const Map: React.FC<MapProps> = ({ center }) => {
+const Map: React.FC<MapProps> = ({ center, country }) => {
     return (
         <MapContainer
             center={(center as L.LatLngExpression) || [51, -0.09]}
@@ -34,7 +35,9 @@ const Map: React.FC<MapProps> = ({ center }) => {
             />
 
             {center ? (
-                <Marker position={center as L.LatLngExpression} />
+                <Marker position={center as L.LatLngExpression}>
+                    <Popup>{country}</Popup>
+                </Marker>
             ) : (
                 <Marker position={[51, -0.09]}>
                     <Popup>Choose a location for your rental property</Popup>
