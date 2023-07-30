@@ -11,6 +11,7 @@ import CategoryInput from "../inputs/CategoryInput";
 import CountrySelect from "../inputs/CountrySelect";
 import Counter from "../inputs/Counter";
 import ImageUpload from "../inputs/ImageUpload";
+import Input from "../inputs/Input";
 
 // hooks
 import useRentModal from "@/hooks/useRentModal";
@@ -29,6 +30,7 @@ const RentModal = () => {
     const rentModal = useRentModal();
 
     const [step, setStep] = useState(STEPS.CATEGORY);
+    const [isLoading, setIsLoading] = useState(false);
 
     const {
         register,
@@ -195,6 +197,38 @@ const RentModal = () => {
                 <ImageUpload
                     value={imageSrc}
                     onChange={(value) => setCustomValue("imageSrc", value)}
+                />
+            </div>
+        );
+    }
+
+    //* STEP 5: description input
+    if (step === STEPS.DESCRIPTION) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="Describe your place to guests"
+                    subtitle="Short & sweet is the way to go"
+                />
+
+                <Input
+                    id="title"
+                    label="Title"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+
+                <hr />
+
+                <Input
+                    id="description"
+                    label="Description"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
                 />
             </div>
         );
