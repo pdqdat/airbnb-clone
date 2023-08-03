@@ -34,7 +34,6 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body className={nunito.className}>
-                {/* to do or not to do: wrap all elements below inside <ClientOnly><ClientOnly/> */}
                 <ClientOnly>
                     <ToasterProvider />
 
