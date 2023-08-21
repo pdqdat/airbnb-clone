@@ -8,6 +8,8 @@ import useCountries from "@/hooks/useCountries";
 import React, { useCallback, useMemo } from "react";
 import { format } from "date-fns";
 
+import Image from "next/image";
+
 interface ListingCardProps {
     data: Listing;
     reservation?: Reservation;
@@ -64,7 +66,23 @@ const ListingCard: React.FC<ListingCardProps> = ({
         return `${format(start, "PP")} - ${format(end, "PP")}`;
     }, [reservation]);
 
-    return <div>ListingCard</div>;
+    return (
+        <div
+            className="col-span-1 cursor-pointer group"
+            onClick={() => router.push(`/listings/${data.id}`)}
+        >
+            <div className="flex flex-col gap-2 w-full">
+                <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+                    <Image
+                        src={data.imageSrc}
+                        alt="Listing"
+                        fill
+                        className="object-cover h-full w-full group-hover:scale-110 transition"
+                    />
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default ListingCard;
