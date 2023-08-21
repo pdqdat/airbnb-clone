@@ -10,6 +10,9 @@ import { format } from "date-fns";
 
 import Image from "next/image";
 
+// components
+import HeartButton from "@/components/HeartButton";
+
 interface ListingCardProps {
     data: Listing;
     reservation?: Reservation;
@@ -79,6 +82,13 @@ const ListingCard: React.FC<ListingCardProps> = ({
                         fill
                         className="object-cover h-full w-full group-hover:scale-110 transition"
                     />
+
+                    <div className="absolute top-3 right-3">
+                        <HeartButton
+                            listingId={data.id}
+                            currentUser={currentUser}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
